@@ -38,7 +38,7 @@ jobs:
       run: npm run test:coverage
     
     - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       with:
         file: ./coverage/lcov.info
         flags: unittests
@@ -46,13 +46,12 @@ jobs:
         fail_ci_if_error: false
     
     - name: Archive test results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: test-results-${{ matrix.node-version }}
-        path: |
-          coverage/
-          test-results.xml
+        path: coverage/
+        if-no-files-found: warn
     
   build:
     runs-on: ubuntu-latest
