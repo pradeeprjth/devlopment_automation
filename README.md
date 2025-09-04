@@ -1,200 +1,293 @@
-# Task Manager Library
+# Todo REST API
 
-A comprehensive Python library for task and user management, designed to provide extensive testing opportunities for various testing scenarios.
-
-## Overview
-
-This project includes multiple modules with different functionalities, making it perfect for writing comprehensive test suites. You can practice testing:
-
-- **Object-oriented classes** with state management
-- **Data validation** and error handling
-- **Mathematical algorithms** and edge cases
-- **String processing** utilities
-- **User authentication** and security
-- **CRUD operations** and data persistence
-- **Enum and datetime** handling
-
-## Project Structure
-
-```
-task_manager/
-├── __init__.py          # Main package initialization
-├── task.py              # Task and TaskManager classes
-├── user.py              # User and UserManager classes
-├── utils.py             # Mathematical and string utilities
-└── validators.py        # Email, password, and data validators
-
-tests/
-└── __init__.py          # Test package (ready for your test files)
-
-example.py               # Comprehensive usage examples
-pytest.ini              # Pytest configuration
-requirements.txt        # Project dependencies
-setup.py                # Package setup configuration
-```
+A simple Node.js REST API application with CRUD operations for managing todos.
 
 ## Features
 
-### Task Management (`task.py`)
-- **Task class**: Create tasks with title, description, priority, and status
-- **TaskManager class**: CRUD operations, filtering, and task organization
-- **Enums**: TaskStatus and TaskPriority for type safety
-- **DateTime handling**: Creation time, updates, due dates
-- **Validation**: Input validation and error handling
+- ✅ Create new todos
+- ✅ Read all todos or specific todo by ID
+- ✅ Update existing todos
+- ✅ Delete todos
+- ✅ Input validation
+- ✅ Error handling
+- ✅ CORS support
 
-### User Management (`user.py`)
-- **User class**: User creation with authentication
-- **UserManager class**: User CRUD, authentication, and indexing
-- **Password hashing**: Secure password storage and verification
-- **Duplicate prevention**: Username and email uniqueness
-- **Role management**: Admin privileges and user activation
+## Technologies Used
 
-### Mathematical Utilities (`utils.py`)
-- **MathUtils class**: Factorial, Fibonacci, prime checking, GCD/LCM
-- **Statistical functions**: Average, median calculations
-- **Number operations**: Power calculations with error handling
-- **Input validation**: Type checking and edge case handling
-
-### String Utilities (`utils.py`)
-- **StringUtils class**: String manipulation and analysis
-- **Text processing**: Word counting, vowel counting, palindrome checking
-- **Text cleaning**: Punctuation removal, space normalization
-- **Pattern extraction**: Number extraction from text
-- **Text transformation**: Capitalization, truncation, deduplication
-
-### Validation Tools (`validators.py`)
-- **EmailValidator**: Email format validation and domain extraction
-- **PasswordValidator**: Configurable password strength checking
-- **DataValidator**: Phone numbers, URLs, and general data validation
-- **Security features**: Input sanitization and length limits
+- **Node.js** - Runtime environment
+- **Express.js** - Web framework
+- **CORS** - Cross-Origin Resource Sharing
 
 ## Installation
 
-1. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd devlopment_automation
+   ```
 
-2. Install the package in development mode:
-```bash
-pip install -e .
-```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
 ## Usage
 
-Run the example script to see all features in action:
+### Start the server:
 ```bash
-python example.py
+npm start
 ```
 
-## Testing Opportunities
+The server will start on `http://localhost:3000`
 
-This library provides excellent opportunities to practice writing tests for:
+### API Endpoints
 
-### Unit Testing Scenarios
-1. **Constructor validation** - Test object creation with valid/invalid inputs
-2. **Method behavior** - Test individual method functionality
-3. **State management** - Test object state changes over time
-4. **Error conditions** - Test exception handling and error messages
-5. **Edge cases** - Test boundary conditions and special values
-6. **Type checking** - Test input type validation
-
-### Integration Testing Scenarios
-1. **Manager classes** - Test interactions between objects and their managers
-2. **Authentication flows** - Test user creation, login, and permission systems
-3. **Task workflows** - Test complete task lifecycle management
-4. **Data consistency** - Test data integrity across operations
-
-### Test Categories to Implement
-
-#### Task Management Tests
-- Task creation with various inputs
-- Task status transitions
-- Due date validation and overdue detection
-- Task assignment and filtering
-- TaskManager CRUD operations
-- Bulk operations and error handling
-
-#### User Management Tests
-- User registration with duplicate checking
-- Password hashing and verification
-- Authentication with various credentials
-- User role management
-- Email and username uniqueness
-- User deactivation and reactivation
-
-#### Mathematical Utilities Tests
-- Factorial calculations (including edge cases like 0! and large numbers)
-- Fibonacci sequence generation
-- Prime number detection
-- GCD and LCM calculations
-- Statistical functions with various datasets
-- Error handling for invalid inputs
-
-#### String Utilities Tests
-- String reversal and palindrome detection
-- Word and character counting
-- Text cleaning and sanitization
-- Pattern extraction and matching
-- Text transformation functions
-- Unicode and special character handling
-
-#### Validation Tests
-- Email format validation with various patterns
-- Password strength evaluation
-- Phone number format validation
-- URL validation
-- Input sanitization effectiveness
-
-### Testing Best Practices to Practice
-1. **Arrange-Act-Assert** pattern
-2. **Test isolation** and independence
-3. **Parameterized tests** for multiple inputs
-4. **Mock objects** for external dependencies
-5. **Test fixtures** for common setup
-6. **Exception testing** with pytest.raises
-7. **Coverage analysis** to ensure comprehensive testing
-8. **Performance testing** for algorithmic functions
-
-## Getting Started with Testing
-
-1. Create test files in the `tests/` directory
-2. Use pytest for running tests: `pytest tests/`
-3. Generate coverage reports: `pytest --cov=task_manager tests/`
-4. Run specific test categories: `pytest -m unit tests/`
-
-## Example Test Structure
-
-```python
-# tests/test_task.py
-import pytest
-from task_manager import Task, TaskManager, TaskStatus, TaskPriority
-
-class TestTask:
-    def test_task_creation_valid_input(self):
-        # Test successful task creation
-        pass
-    
-    def test_task_creation_invalid_input(self):
-        # Test task creation with invalid inputs
-        pass
-    
-    def test_task_status_update(self):
-        # Test status transitions
-        pass
-    
-    # Add more test methods...
-
-class TestTaskManager:
-    def setup_method(self):
-        # Setup for each test method
-        self.task_manager = TaskManager()
-    
-    def test_create_task(self):
-        # Test task creation through manager
-        pass
-    
-    # Add more test methods...
+#### Get all todos
+```http
+GET /todos
 ```
 
-This project structure provides a rich foundation for exploring different testing patterns, scenarios, and best practices in Python development!
+**Response:**
+```json
+{
+  "success": true,
+  "count": 2,
+  "data": [
+    {
+      "id": 1,
+      "title": "Learn Node.js",
+      "description": "Study Node.js fundamentals",
+      "completed": false,
+      "createdAt": "2023-01-01T00:00:00.000Z"
+    }
+  ]
+}
+```
+
+#### Get a specific todo
+```http
+GET /todos/:id
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "title": "Learn Node.js",
+    "description": "Study Node.js fundamentals",
+    "completed": false,
+    "createdAt": "2023-01-01T00:00:00.000Z"
+  }
+}
+```
+
+#### Create a new todo
+```http
+POST /todos
+Content-Type: application/json
+
+{
+  "title": "New Todo",
+  "description": "Todo description (optional)"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Todo created successfully",
+  "data": {
+    "id": 3,
+    "title": "New Todo",
+    "description": "Todo description",
+    "completed": false,
+    "createdAt": "2023-01-01T00:00:00.000Z",
+    "updatedAt": "2023-01-01T00:00:00.000Z"
+  }
+}
+```
+
+#### Update a todo
+```http
+PUT /todos/:id
+Content-Type: application/json
+
+{
+  "title": "Updated Todo",
+  "description": "Updated description",
+  "completed": true
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Todo updated successfully",
+  "data": {
+    "id": 1,
+    "title": "Updated Todo",
+    "description": "Updated description",
+    "completed": true,
+    "createdAt": "2023-01-01T00:00:00.000Z",
+    "updatedAt": "2023-01-01T00:05:00.000Z"
+  }
+}
+```
+
+#### Delete a todo
+```http
+DELETE /todos/:id
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Todo deleted successfully",
+  "data": {
+    "id": 1,
+    "title": "Deleted Todo",
+    "description": "This todo was deleted",
+    "completed": false,
+    "createdAt": "2023-01-01T00:00:00.000Z"
+  }
+}
+```
+
+## Testing the API
+
+You can test the API using:
+
+### Using curl:
+
+```bash
+# Get all todos
+curl http://localhost:3000/todos
+
+# Create a new todo
+curl -X POST http://localhost:3000/todos \
+  -H "Content-Type: application/json" \
+  -d '{"title": "Test Todo", "description": "Testing the API"}'
+
+# Update a todo
+curl -X PUT http://localhost:3000/todos/1 \
+  -H "Content-Type: application/json" \
+  -d '{"completed": true}'
+
+# Delete a todo
+curl -X DELETE http://localhost:3000/todos/1
+```
+
+### Using PowerShell (Windows):
+
+```powershell
+# Get all todos
+Invoke-RestMethod -Uri "http://localhost:3000/todos" -Method GET
+
+# Create a new todo
+$body = @{
+    title = "Test Todo"
+    description = "Testing the API"
+} | ConvertTo-Json
+
+Invoke-RestMethod -Uri "http://localhost:3000/todos" -Method POST -Body $body -ContentType "application/json"
+```
+
+## Error Handling
+
+The API includes comprehensive error handling:
+
+- **400 Bad Request** - Invalid input data
+- **404 Not Found** - Todo not found
+- **500 Internal Server Error** - Server errors
+
+All error responses follow this format:
+```json
+{
+  "success": false,
+  "message": "Error description"
+}
+```
+
+## Data Storage
+
+Currently, the application uses in-memory storage. This means data will be lost when the server restarts. For production use, consider integrating with a database like MongoDB, PostgreSQL, or MySQL.
+
+## Development
+
+- The server includes CORS support for cross-origin requests
+- Input validation ensures data integrity
+- Proper HTTP status codes are returned
+- Structured JSON responses for consistency
+
+## Testing
+
+The project includes comprehensive test cases using Jest and Supertest.
+
+### Running Tests
+
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage report
+npm run test:coverage
+```
+
+### Test Coverage
+
+The test suite includes:
+- **Unit tests** for all API endpoints
+- **Integration tests** for complete workflows
+- **Error handling tests** for edge cases
+- **Input validation tests** for data integrity
+- **CRUD lifecycle tests** for complete operations
+
+Current test coverage: **93%+ statement coverage**
+
+### Test Structure
+
+```
+tests/
+├── todos.test.js      # Main API endpoint tests
+├── setup.js           # Jest configuration and setup
+└── ...
+```
+
+## CI/CD
+
+The project includes GitHub Actions workflows for continuous integration:
+
+### Workflows
+
+1. **Test Workflow** (`.github/workflows/test.yml`)
+   - Runs on push to main/develop branches
+   - Executes all tests
+   - Generates coverage reports
+   - Uploads coverage to Codecov
+
+2. **CI/CD Pipeline** (`.github/workflows/ci.yml`)
+   - Multi-node version testing (Node.js 18.x, 20.x)
+   - Security audits
+   - Build verification
+   - Server startup testing
+
+### GitHub Actions Features
+
+- ✅ Automated testing on pull requests
+- ✅ Multi-version Node.js testing
+- ✅ Code coverage reporting
+- ✅ Security vulnerability scanning
+- ✅ Automated dependency updates
+- ✅ Build verification
+
+## License
+
+ISC
